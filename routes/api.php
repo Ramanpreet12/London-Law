@@ -31,7 +31,7 @@ Route::middleware('auth:api')->group(function () {
     // });
 
     Route::middleware('role:0')->prefix('user')->group(function () {
-        // Route::get('/dashboard', [FormationController::class, 'dashboardList']);
+        Route::get('/dashboard', [FormationController::class, 'dashboard']);
         Route::post('/formation/step-1', [FormationController::class, 'storeStep1']);
         // Route::post('/formation/step-2', [FormationController::class, 'storeStep2']);
 

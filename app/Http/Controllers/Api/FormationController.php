@@ -12,6 +12,20 @@ class FormationController extends Controller
 {
     use ApiResponse;
 
+    public function dashboard()
+    {
+        try {
+            // Sirf id aur proposed_name_1 get kar rahe hain
+            $formations = Formation::where('user_id', auth()->id())
+                ->select('id', 'proposed_name_1', 'current_step', 'created_at')
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            return $this->successResponse($formations, 'Formations list retrieved successfully');
+        } catch (\Exception $e) {
+            return $this->errorResponse('Failed to fetch dashboard data: ' . $e->getMessage(), 500);
+        }
+    }
     public function storeStep1(Request $request)
     {
         try {
